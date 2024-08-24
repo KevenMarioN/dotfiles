@@ -1,0 +1,22 @@
+
+export GOPRIVATE=github.com/Brisanet
+export GOLANG_PROTOBUF_REGISTRATION_CONFLICT=warn
+export AUTH_RECAPTCHA_SECRET=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+export TRANSACTION_TIMEOUT=2
+export MAX_OPEN_CONN=10
+export MAX_IDLE_CONN=5
+export GRPC_AUTH_ADDRESS=:4110
+export HTTP_AUTH_ADDRESS=:4100
+export AUTH_LOG_PATH=/var/log/auth/
+export AUTH_PRODUCTION=false
+export NOTIFY_URL=http://192.168.111.10:6060/
+export AUTH_SECRETS=developdenkjednkjfn
+export HEARTBEAT_ENDPOINT=http://192.168.111.12:9200/health_dev/_doc
+export HEARTBEAT_INTERVAL=60
+export CORS_ALLOWED_ORIGINS=*
+export TL1_SERVER_URL=http://192.168.111.9:3280
+export WAREHOUSE_SERVER_URL=http://localhost:8088
+export FINANCIAL_SERVER_URL=financeiro:4848
+#export REVAN_RW_DATABASE_URI=postgres://revan:dev123456@172.16.30.6:5432/netmanager_desenvolvimento?sslmode=disable
+export REVAN_RW_DATABASE_URI=postgres://revan:dev123456@172.16.209.2:5432/netmanager?sslmode=disable
+export AUTH_SECRETS=developdenkjednkjfn
