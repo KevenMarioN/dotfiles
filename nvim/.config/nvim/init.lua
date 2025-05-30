@@ -1,2 +1,2 @@
-require("kevenmario.core")
-require("kevenmario.lazy")
+require("mario.core")
+require("mario.lazy")
