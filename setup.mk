@@ -10,7 +10,8 @@ ASDF_PLUGINS := \
   deno \
 	jq \
 	fzf \
-	bat
+	bat \
+	fd
 
 # Plugins personalizados com URL (que não estão no repo principal)
 ASDF_CUSTOM_PLUGINS := \
@@ -21,9 +22,9 @@ ASDF_CUSTOM_PLUGINS := \
   delve=https://github.com/yocalebo/asdf-delve.git \
 	tmux=https://github.com/aphecetche/asdf-tmux.git \
   bat=https://github.com/asdf-community/asdf-bat.git \
-	lazygit=https://github.com/nklmilojevic/asdf-lazygit.git \
 	mockery=https://github.com/ryodocx/asdf-mockery.git \
-  delve=https://github.com/yocalebo/asdf-delve.git
+  delve=https://github.com/yocalebo/asdf-delve.git \
+	cargo=https://github.com/andweeb/asdf-cargo.git
 
 
 apt:
@@ -73,4 +74,17 @@ go-tools:
 	@go install golang.org/x/tools/cmd/goimports@latest
 	@go install github.com/go-delve/delve/cmd/dlv@latest
 
-setup: apt asdf-install asdf-langs asdf-custom nvim
+cargo-tools:
+	@echo "🔨 Instalando ferramentas Rust via cargo install..."
+	@which eza >/dev/null 2>&1 && echo "✅ eza já instalado" || \
+		(cargo install eza && echo "✅ eza instalado com sucesso" || echo "❌ Falha ao instalar eza")
+	@which tlrc >/dev/null 2>&1 && echo "✅ tlrc já instalado" || \
+		(cargo install tlrc --version 1.10.0 && echo "✅ tlrc instalado com sucesso (v1.10.0)" || echo "❌ Falha ao instalar tlrc (use versão mais antiga ou corrija dependências)")
+	@which zoxide >/dev/null 2>&1 && echo "✅ zoxide já instalado" || \
+		(cargo install zoxide && echo "✅ zoxide instalado com sucesso" || echo "❌ Falha ao instalar zoxide")
+
+python-tools:
+	@echo "🔨 Instalando ferramentas Python via npm install..."
+	@pip install thefuck --user
+
+setup: apt asdf-install asdf-langs asdf-custom nvim cargo-tools python-tools
