@@ -1,4 +1,3 @@
-
 # Lista dos binários que já estão instalados via asdf/go install e você quer registrar no Mason
 MASON_FAKE_LSPS := gopls golangci-lint-langserver delve mockery
 

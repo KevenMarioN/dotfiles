@@ -1,30 +1,63 @@
-export ZSH="$HOME/.oh-my-zsh"
+# ASDF - Inicialização manual antes de tudo
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+  . "$HOME/.asdf/asdf.sh"
+fi
 
-plugins=(git asdf web-search zsh-autosuggestions zsh-syntax-highlighting)
+if [ -f "$HOME/.asdf/completions/asdf.zsh" ]; then
+  . "$HOME/.asdf/completions/asdf.zsh"
+fi
 
-source $ZSH/oh-my-zsh.sh
+if [ -f "$HOME/.work_zsh" ]; then
+  . "$HOME/.work_zsh"
+fi
 
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
+# Caminhos prioritários
+#export TERM="screen-256color"
+export PATH="$HOME/.asdf/shims:$PATH"
+export GOBIN="$HOME/go/bin"
+export PATH="$GOBIN:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$(asdf where rust)/bin:$PATH"
 
-export THEME_DIR=$HOME/.themes/Catppuccin-Mocha-Standard-Sapphire-Dark/
-export GTK_THEME='Catppuccin-Mocha-Standard-Shapphire-Dark:dark'
-
-# Starship
+# Starship Prompt
 eval "$(starship init zsh)"
 export STARSHIP_CONFIG=~/.config/starship.toml
 
-# Alias
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
-alias cat="bat --style=auto"
-alias cd="z"
-alias n="nvim"
-alias wezterm='flatpak run org.wezfurlong.wezterm'
-alias letsgo="asdf exec go run ."
-alias tocloud="asdf exec npm start"
+# Oh My Zsh
+export ZSH="$HOME/.oh-my-zsh"
+plugins=(
+  aws
+  kubectl
+  rust
+  golang
+  node
+  pm2
+  sdk
+  git
+  vscode
+  colored-man-pages
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-interactive-cd
+  asdf
+)
+source $ZSH/oh-my-zsh.sh
 
-# Git
+# Completions do ASDF no fpath
+fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
+autoload -Uz compinit && compinit
+
+# Usa 'bat' no lugar do 'cat' se estiver instalado
+if command -v bat >/dev/null 2>&1; then
+  alias cat='bat'
+fi
+
+# Go
+export GOPATH="$(asdf where golang)/packages"
+export GOROOT="$(asdf where golang)/go"
+
+# Git aliases
 alias gc="git commit -m"
 alias gca="git commit -a -m"
 alias gp="git push origin HEAD"
@@ -41,7 +74,7 @@ alias gcoall='git checkout -- .'
 alias gr='git remote'
 alias gre='git reset'
 
-# Docker
+# Docker aliases
 alias dco="docker compose"
 alias dps="docker ps"
 alias dpa="docker ps -a"
@@ -49,56 +82,27 @@ alias dl="docker ps -l -q"
 alias dx="docker exec -it"
 alias dc="docker rm -f $(docker ps -a -q) || docker volume rm -f $(docker volume ls -q)"
 
-# Dirs
+# Navegação de diretórios
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ......="cd ../../../../.."
 
-# Variables
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export ANDROID_HOME=~/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export EDITOR="/snap/bin/nvim"
-
-# Go
-export GOPATH=$(asdf where golang)/packages
-export GOROOT=$(asdf where golang)/go
-export PATH=$PATH:~/go/bin
-
-# Rust
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:$PATH
-export CARGO_HOME=$HOME/.cargo
-
-# WORK ENVIRONMENT
-if [ -f ~/.work_zshrc ]; then
-    source ~/.work_zshrc
-else
-    print "404: ~/.work_zshrc not found."
-fi
-
 # ---- FZF -----
+
 # Set up fzf key bindings and fuzzy completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(fzf --zsh)"
 
-# --- Setup FZF Theme ---
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# -- Use fd instead of fzf --
 
-export FZF_DEFAULT_COMMAND="fd --hidden --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --exclude .git"
-export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
 }
@@ -108,29 +112,64 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+# Atalhos do fzf-git.sh
+[ -f "$HOME/fzf-git.sh/fzf-git.sh" ] && source "$HOME/fzf-git.sh/fzf-git.sh"
+
+# --- setup fzf theme ---
+fg="#CBE0F0"
+bg="#011628"
+bg_highlight="#143652"
+purple="#B388FF"
+blue="#06BCE4"
+cyan="#2CF9ED"
+
+export FZF_DEFAULT_OPTS="--color=fg:${fg},bg:${bg},hl:${purple},fg+:${fg},bg+:${bg_highlight},hl+:${purple},info:${blue},prompt:${cyan},pointer:${cyan},marker:${cyan},spinner:${cyan},header:${cyan}"
+
+## FZF
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
 _fzf_comprun() {
   local command=$1
   shift
 
   case "$command" in
     cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
-    export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
+    export|unset) fzf --preview "eval 'echo ${}'"         "$@" ;;
     ssh)          fzf --preview 'dig {}'                   "$@" ;;
-    *)            fzf --preview "bat -n --color=always --line-range :500 {}" "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
 
-source ~/fzf-git.sh/fzf-git.sh
-
 # ----- Bat (better cat) -----
+command -v bat >/dev/null && export BAT_THEME=tokyonight_night
 
-export BAT_THEME=catppuccin_mocha
+# ---- Eza (better ls) -----
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"alias ls='eza --icons --group-directories-first'
+fi
+
+# thefuck alias
+if command -v thefuck >/dev/null 2>&1; then
+  eval $(thefuck --alias)
+  eval $(thefuck --alias fk)
+fi
 
 # ---- Zoxide (better cd) ----
+if command -v zoxide >/dev/null 2>&1; then
 eval "$(zoxide init zsh)"
+alias cd="z"
+fi
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/kevenmario/google-cloud-sdk/path.zsh.inc' ]; then . '/home/kevenmario/google-cloud-sdk/path.zsh.inc'; fi
+# Start tmux automatic
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux new-session -A -s main
+fi
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/kevenmario/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/kevenmario/google-cloud-sdk/completion.zsh.inc'; fi
+# GPG (para commits assinados)
+export GPG_TTY=$(tty)

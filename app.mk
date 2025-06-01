@@ -1,4 +1,3 @@
-
 LAZYGIT_VERSION := 0.42.0
 LAZYGIT_TAR := lazygit_$(LAZYGIT_VERSION)_Linux_x86_64.tar.gz
 LAZYGIT_URL := https://github.com/jesseduffield/lazygit/releases/download/v$(LAZYGIT_VERSION)/$(LAZYGIT_TAR)
