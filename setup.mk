@@ -73,6 +73,13 @@ go-tools:
 	@echo "🔨 Instalando ferramentas Go via go install..."
 	@go install golang.org/x/tools/cmd/goimports@latest
 	@go install github.com/go-delve/delve/cmd/dlv@latest
+	@go install golang.org/x/tools/cmd/goimports@latest
+	@go install mvdan.cc/gofumpt@latest
+	@go install github.com/segmentio/golines@latest
+	@go install github.com/vektra/mockery/v2@latest
+	@go install github.com/go-delve/delve/cmd/dlv@latest
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+	@asdf reshim golang
 
 cargo-tools:
 	@echo "🔨 Instalando ferramentas Rust via cargo install..."
@@ -82,6 +89,7 @@ cargo-tools:
 		(cargo install tlrc --version 1.10.0 && echo "✅ tlrc instalado com sucesso (v1.10.0)" || echo "❌ Falha ao instalar tlrc (use versão mais antiga ou corrija dependências)")
 	@which zoxide >/dev/null 2>&1 && echo "✅ zoxide já instalado" || \
 		(cargo install zoxide && echo "✅ zoxide instalado com sucesso" || echo "❌ Falha ao instalar zoxide")
+	@asdf reshim rust 
 
 python-tools:
 	@echo "🔨 Instalando ferramentas Python via npm install..."

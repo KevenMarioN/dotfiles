@@ -65,18 +65,29 @@ return {
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
+	  vim.diagnostic.config({
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.INFO] = "󰋼 ",
+          [vim.diagnostic.severity.HINT] = "󰌵 ",
+        },
+        numhl = {
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.HINT] = "",
+          [vim.diagnostic.severity.INFO] = "",
+        },
+      },
+    })
 
 		vim.lsp.config("*", {
 			capabilities = capabilities,
 		})
 		-- Svelte configuration
 		vim.lsp.config("svelte", {
-			on_attach = function(client, bufnr)
+			on_attach = function(client)
 				vim.api.nvim_create_autocmd("BufWritePost", {
 					pattern = { "*.js", "*.ts" },
 					callback = function(ctx)
@@ -123,5 +134,41 @@ return {
 				},
 			},
 		})
+    -- Golang configuration
+    vim.lsp.config("gopls", {
+      filetypes = { "go", "gomod", "gowork", "gotmpl" },
+      root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = {
+            unusedparams = true,
+            shadow = true,
+          },
+          staticcheck = true,
+        },
+      },
+      on_attach = function(_, bufnr)
+        -- Organiza os imports ao salvar
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = bufnr,
+          callback = function()
+            local params = vim.lsp.util.make_range_params()
+            params.context = { only = { "source.organizeImports" } }
+            local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
+            for _, res in pairs(result or {}) do
+              for _, r in pairs(res.result or {}) do
+                if r.edit then
+                  vim.lsp.util.apply_workspace_edit(r.edit, "utf-16")
+                elseif r.command then
+                  vim.lsp.buf.execute_command(r.command)
+                end
+              end
+            end
+          end,
+        })
+      end,
+    })
 	end,
 }
