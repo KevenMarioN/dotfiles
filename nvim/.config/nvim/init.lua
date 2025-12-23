@@ -1,2 +1,1 @@
-require("mario.core")
-require("mario.lazy")
+require("config.lazy")
