@@ -8,9 +8,7 @@ $os$username\
 $directory\
 [](fg:bg2 bg:blue)\
 $c$rust$nodejs$python$golang$docker_context\
-[](fg:blue bg:purple)\
-$time\
-[](fg:purple)\
+[](fg:blue bg:bg)\
 $line_break$character
 """
 
