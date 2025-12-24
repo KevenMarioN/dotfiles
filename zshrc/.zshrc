@@ -1,3 +1,11 @@
+# SSH Agent
+if [ -z "$SSH_AGENT_PID" ]; then
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/personal_github # Opcional: Adiciona sua chave principal automaticamente
+fi
+# GPG (para commits assinados)
+export GPG_TTY=$(tty)
+
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
@@ -31,14 +39,6 @@ autoload -U compinit && compinit
 # Paths
 export PATH=$PATH:$HOME/go/bin
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# SSH Agent
-if [ -z "$SSH_AGENT_PID" ]; then
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/personal_github # Opcional: Adiciona sua chave principal automaticamente
-fi
-# GPG (para commits assinados)
-export GPG_TTY=$(tty)
 
 # GO
 export GOPRIVATE=github.com/KevenMarioN/*
