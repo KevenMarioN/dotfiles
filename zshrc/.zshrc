@@ -50,7 +50,7 @@ bindkey '^n' history-search-forward
 
 # History
 HISTSIZE=5000
-HISTFILE="~/.zsh_history"
+HISTFILE=$HOME/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 setopt appendhistory
@@ -104,3 +104,11 @@ if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
   export STARSHIP_CONFIG=~/.config/starship.toml
 fi
+
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --icons'
+  alias ll='eza -l --icons --git --group-directories-first'
+  alias la='eza -la --icons --git --group-directories-first'
+  alias tree='eza --tree --icons'
+fi
+
