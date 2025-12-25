@@ -30,11 +30,10 @@ zinit snippet OMZP::aws
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
-zinit snippet OMZP::asdf
 zinit snippet OMZP::docker
 
 # Load completions
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 # Paths
 export PATH=$PATH:$HOME/go/bin
@@ -83,8 +82,13 @@ if command -v fzf >/dev/null 2>&1; then
     --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 fi
 
-if [ -f "$HOME/.asdf/completions/asdf.zsh" ]; then
-  . "$HOME/.asdf/completions/asdf.zsh"
+
+if [[ -d "$ASDF_DIR" ]]; then
+  export ASDF_DIR="$HOME/.asdf"
+  export PATH="$ASDF_DIR/bin:$PATH"
+
+  fpath=("$ASDF_DIR/completions" $fpath)
+  zinit snippet OMZP::asdf
 fi
 
 if [ -f "$HOME/.work_zsh" ]; then
