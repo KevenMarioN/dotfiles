@@ -83,8 +83,8 @@ if command -v fzf >/dev/null 2>&1; then
 fi
 
 
+export ASDF_DIR="$HOME/.asdf"
 if [[ -d "$ASDF_DIR" ]]; then
-  export ASDF_DIR="$HOME/.asdf"
   export PATH="$ASDF_DIR/bin:$PATH"
 
   fpath=("$ASDF_DIR/completions" $fpath)
