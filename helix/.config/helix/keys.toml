@@ -1,0 +1,7 @@
+[keys.normal]
+# Navegar com as teclas [ e ] (muito comum em configurações "pro")
+"tab" = "goto_previous_buffer"
+"S-tab" = "goto_next_buffer"
+
+# Fechar a aba atual rapidamente com "q" (no modo normal)
+"q" = ":bc"
