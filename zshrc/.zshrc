@@ -1,8 +1,10 @@
-export COLORTERM=truecolor 
+export COLORTERM=truecolor
 # SSH Agent
 if [ -z "$SSH_AGENT_PID" ]; then
+  if [-f "$HOME/.ssh/personal_github"]; then
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/personal_github # Opcional: Adiciona sua chave principal automaticamente
+  fi
 fi
 # GPG (para commits assinados)
 export GPG_TTY=$(tty)
