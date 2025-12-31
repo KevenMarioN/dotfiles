@@ -22,10 +22,10 @@ fi
 
 if command -v fzf >/dev/null 2>&1; then
   export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-    --color=fg:#c0caf5,bg:#1a1b26,hl:#bb9af7 \
-    --color=fg+:#c0caf5,bg+:#1a1b26,hl+:#7dcfff \
-    --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
-    --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+    --color=fg:#ebdbb2,bg:#282828,hl:#fabd2f \
+    --color=fg+:#ebdbb2,bg+:#3c3836,hl+:#fe8019 \
+    --color=info:#83a598,prompt:#b8bb26,pointer:#fb4934 \
+    --color=marker:#fb4934,spinner:#fabd2f,header:#83a598"
 fi
 
 # GO
