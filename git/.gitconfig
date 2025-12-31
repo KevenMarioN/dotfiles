@@ -17,5 +17,6 @@
 	format = ssh
 [user]
 	signingkey = /home/keven/.ssh/personal_github.pub
+	email = kevenmario.n.r@gmail.com
 [commit]
 	gpgsign = true
