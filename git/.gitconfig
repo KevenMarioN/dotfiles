@@ -1,0 +1,21 @@
+[init]
+  defaultBranch = main
+[core]
+  editor = nvim
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  ignorecase = true
+  precomposeunicode = true
+[pull]
+  rebase=true
+
+[credential]
+	helper = store
+[gpg]
+	format = ssh
+[user]
+	signingkey = /home/keven/.ssh/personal_github.pub
+[commit]
+	gpgsign = true

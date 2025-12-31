@@ -1,5 +1,5 @@
 "$schema" = 'https://starship.rs/config-schema.json'
-palette = 'tokyonight_storm'
+palette = 'gruvbox_dark'
 
 format = """
 [](fg:surface2)\
@@ -33,6 +33,28 @@ surface0 = "#313244"
 surface1 = "#45475a"
 surface2 = "#585b70"
 mantle = "#1e2030"
+
+[palettes.gruvbox_dark]
+bg = "#282828"        # Hard dark background
+bg2 = "#3c3836"       # Lighter background
+fg = "#ebdbb2"        # Cream foreground
+text = "#ebdbb2"
+base = "#282828"
+blue = "#83a598"      # Gruvbox Blue (Light)
+cyan = "#8ec07c"      # Gruvbox Aqua (Light) - Ótimo para Golang
+green = "#b8bb26"     # Gruvbox Green (Light)
+magenta = "#d3869b"   # Gruvbox Purple (Light)
+orange = "#fe8019"    # Gruvbox Orange (Light)
+pink = "#d3869b"      # Usando Purple como Pink
+purple = "#d3869b"
+red = "#fb4934"       # Gruvbox Red (Light)
+teal = "#8ec07c"
+yellow = "#fabd2f"    # Gruvbox Yellow (Light)
+comment = "#928374"   # Gray
+surface0 = "#32302f"
+surface1 = "#504945"
+surface2 = "#665c54"
+mantle = "#1d2021"
 
 [os]
 disabled = false
