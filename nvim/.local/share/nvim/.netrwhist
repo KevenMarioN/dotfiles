@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/keven/dotfiles/nvim/.config/nvim/lua/config'
+let g:netrw_dirhist_7='/home/keven/dotfiles/nvim/.config/nvim/lua'
+let g:netrw_dirhist_6='/home/keven/dotfiles/nvim/.config/nvim'
+let g:netrw_dirhist_5='/home/keven/dotfiles/tmux/.config/tmux'
+let g:netrw_dirhist_4='/home/keven/dotfiles/kitty/.config/kitty'
+let g:netrw_dirhist_3='/home/keven/dotfiles/kitty/.config'
+let g:netrw_dirhist_2='/home/keven/dotfiles/kitty'
+let g:netrw_dirhist_1='/home/keven/dotfiles/tmux/.config/tmux'
+let g:netrw_dirhist_0='/home/keven/dotfiles/tmux/.config/tmux/scripts'
+let g:netrw_dirhist_9='/home/keven/dotfiles/tmux/.config/tmux'
