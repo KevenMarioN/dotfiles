@@ -30,58 +30,58 @@ if ! command -v apt >/dev/null 2>&1; then
 fi
 
 loginfo "Your system have apt, updating packages..."
-  sudo apt update -y
-  sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
-  sudo apt upgrade -y
+sudo apt update -y
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch
+sudo apt upgrade -y
 
 loginfo "Installing apps..."
-    sudo apt-get install git build-essential libssl-dev zlib1g-dev \
-        libbz2-dev libreadline-dev libsqlite3-dev wget curl \
-        llvm gettext tk-dev tcl-dev blt-dev libgdbm-dev \
-        git python3-dev aria2 lzma liblzma-dev \
-        cmake ninja-build pkg-config libtool \
-        libtool-bin autoconf automake gettext curl xclip \
-        -y
+sudo apt-get install git build-essential libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev wget curl \
+  llvm gettext tk-dev tcl-dev blt-dev libgdbm-dev \
+  git python3-dev aria2 lzma liblzma-dev \
+  cmake ninja-build pkg-config libtool \
+  libtool-bin autoconf automake gettext curl xclip \
+  -y
 
 loginfo "Installing apps..."
-    sudo apt install \
-        openssl bat cmake ffmpeg fzf htop nano \
-        p7zip pkgconf sqlite3 tcl tk tcl-dev tk-dev tmux \
-        tree watch wget fonts-firacode fonts-jetbrains-mono vim zoxide ripgrep eza stow fastfetch \
-        -y
+sudo apt install \
+  openssl bat cmake ffmpeg fzf htop nano \
+  p7zip pkgconf sqlite3 tcl tk tcl-dev tk-dev tmux \
+  tree watch wget fonts-firacode fonts-jetbrains-mono vim zoxide ripgrep eza stow fastfetch \
+  -y
 
-if ! command -v nvim &> /dev/null; then
-    loginfo "Compiling and Installing nvim..."
-    git clone https://github.com/neovim/neovim.git ~/neovim
-    cd ~/neovim
-    git checkout stable
-    make CMAKE_BUILD_TYPE=Release
-    sudo make install
-    cd build
-    sudo cpack -G DEB
-    sudo dpkg -i nvim-linux*.deb
-    cd ~
-    sudo rm -Rf ~/neovim
-  else
-    loginfo "Nvim já instalado..."
-  fi
-
-if ! command -v zsh &> /dev/null; then
-    loginfo "Installing ZSH..."
-    sudo apt install zsh -y
-    chsh -s $(which zsh)
+if ! command -v nvim &>/dev/null; then
+  loginfo "Compiling and Installing nvim..."
+  git clone https://github.com/neovim/neovim.git ~/neovim
+  cd ~/neovim
+  git checkout stable
+  make CMAKE_BUILD_TYPE=Release
+  sudo make install
+  cd build
+  sudo cpack -G DEB
+  sudo dpkg -i nvim-linux*.deb
+  cd ~
+  sudo rm -Rf ~/neovim
 else
-    loginfo "ZSH has install..."
+  loginfo "Nvim já instalado..."
 fi
 
-if ! command -v ghostty &> /dev/null; then
+if ! command -v zsh &>/dev/null; then
+  loginfo "Installing ZSH..."
+  sudo apt install zsh -y
+  chsh -s $(which zsh)
+else
+  loginfo "ZSH has install..."
+fi
+
+if ! command -v ghostty &>/dev/null; then
   loginfo "Installing Ghostty..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
 else
- loginfo "Ghostty has install..."
+  loginfo "Ghostty has install..."
 fi
 
-if ! command -v docker &> /dev/null; then
+if ! command -v docker &>/dev/null; then
   loginfo "Starting Install Docker"
   sudo apt-get remove docker docker-engine docker.io containerd runc
 
@@ -93,15 +93,15 @@ if ! command -v docker &> /dev/null; then
   sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
   echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$UBUNTU_CODENAME") stable" |
+    sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
   sudo apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
   sudo groupadd docker
-  sudo usermod -aG docker $USER	
+  sudo usermod -aG docker $USER
   newgrp docker
 else
   loginfo "Docker has install..."
@@ -135,7 +135,7 @@ if ! command -v starship >/dev/null 2>&1; then
   loginfo "Installing Starship..."
   curl -sS https://starship.rs/install.sh | sh
 else
- loginfo "Startship has install"
+  loginfo "Startship has install"
 fi
 
 # --- Configuração do Neovim com Lazy.nvim ---
@@ -153,8 +153,7 @@ if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
 fi
 
 ## ASDF
-
-if ! command -v asdf &> /dev/null; then
+if ! command -v asdf &>/dev/null; then
   loginfo "Installing ASDF..."
 
   # --- Configuration ---
@@ -170,9 +169,9 @@ if ! command -v asdf &> /dev/null; then
 
   # Adjust names to match GitHub Release naming convention
   if [ "$ARCH" == "x86_64" ]; then
-      ARCH="amd64"
+    ARCH="amd64"
   elif [ "$ARCH" == "aarch64" ]; then
-      ARCH="arm64"
+    ARCH="arm64"
   fi
 
   DOWNLOAD_URL="https://github.com/asdf-vm/asdf/releases/download/${ASDF_VERSION}/asdf-${ASDF_VERSION}-${OS}-${ARCH}.tar.gz"
@@ -180,55 +179,55 @@ if ! command -v asdf &> /dev/null; then
   # --- Functions ---
 
   install_asdf_core() {
-      loginfo "🖥️  System: $OS / $ARCH"
-      loginfo "📦 Target Version: $ASDF_VERSION"
+    loginfo "🖥️  System: $OS / $ARCH"
+    loginfo "📦 Target Version: $ASDF_VERSION"
 
-      if [ -f "$ASDF_EXEC" ]; then
-          logerror "✅ ASDF já está instalado em $ASDF_BIN_DIR"
-          return
-      fi
+    if [ -f "$ASDF_EXEC" ]; then
+      logerror "✅ ASDF já está instalado em $ASDF_BIN_DIR"
+      return
+    fi
 
-      loginfo "🔍 Preparing installation..."
-      mkdir -p "$ASDF_BIN_DIR"
-      mkdir -p "$ASDF_COMP_DIR"
+    loginfo "🔍 Preparing installation..."
+    mkdir -p "$ASDF_BIN_DIR"
+    mkdir -p "$ASDF_COMP_DIR"
 
-      loginfo "⬇️  Downloading ASDF ($ASDF_VERSION)..."
-      curl -L "$DOWNLOAD_URL" | tar xz -C "$ASDF_BIN_DIR"
+    loginfo "⬇️  Downloading ASDF ($ASDF_VERSION)..."
+    curl -L "$DOWNLOAD_URL" | tar xz -C "$ASDF_BIN_DIR"
 
-      loginfo "⚙️  Generating completions..."
-      "$ASDF_EXEC" completion zsh > "$ASDF_COMP_DIR/_asdf"
+    loginfo "⚙️  Generating completions..."
+    "$ASDF_EXEC" completion zsh >"$ASDF_COMP_DIR/_asdf"
 
-      logsuccess "✨ ASDF Core installed."
+    logsuccess "✨ ASDF Core installed."
   }
 
   install_tool() {
-      local name=$1
-      local version=$2
-      local repo=$3
+    local name=$1
+    local version=$2
+    local repo=$3
 
-      loginfo "👉 Processando: $name ($version)..."
+    loginfo "👉 Processando: $name ($version)..."
 
-      # Adiciona o plugin
-      if "$ASDF_EXEC" plugin list | grep -q "^$name$"; then
-          logerror "   Plugin $name já existe."
+    # Adiciona o plugin
+    if "$ASDF_EXEC" plugin list | grep -q "^$name$"; then
+      logerror "   Plugin $name já existe."
+    else
+      echo "   Adicionando plugin $name..."
+      if [ -n "$repo" ]; then
+        "$ASDF_EXEC" plugin add "$name" "$repo"
       else
-          echo "   Adicionando plugin $name..."
-          if [ -n "$repo" ]; then
-              "$ASDF_EXEC" plugin add "$name" "$repo"
-          else
-              "$ASDF_EXEC" plugin add "$name"
-          fi
+        "$ASDF_EXEC" plugin add "$name"
       fi
+    fi
 
-      # Instala a versão
-      echo "   Instalando versão $version..."
-      "$ASDF_EXEC" install "$name" "$version"
+    # Instala a versão
+    echo "   Instalando versão $version..."
+    "$ASDF_EXEC" install "$name" "$version"
 
-      # Define como global
-      echo "   Definindo global..."
-      "$ASDF_EXEC" set -u "$name" "$version"
-      
-      logsuccess "✅ $name configurado."
+    # Define como global
+    echo "   Definindo global..."
+    "$ASDF_EXEC" set -u "$name" "$version"
+
+    logsuccess "✅ $name configurado."
   }
 
   # --- Main Execution ---
@@ -240,10 +239,10 @@ if ! command -v asdf &> /dev/null; then
   export PATH="${ASDF_BIN_DIR}:${PATH}"
 
   loginfo "\n🏗️  Instalando Linguagens..."
-  install_tool "golang" "latest"     # Backend
-  install_tool "nodejs" "latest"     # Frontend Svelte
-  install_tool "rust" "latest"       # Ferramentas CLI
-  install_tool "python" "latest"     # Scripting
+  install_tool "golang" "latest" # Backend
+  install_tool "nodejs" "latest" # Frontend Svelte
+  install_tool "rust" "latest"   # Ferramentas CLI
+  install_tool "python" "latest" # Scripting
 
   loginfo "\n🐳 Instalando Ferramentas DevOps..."
   install_tool "lazygit" "latest" "https://github.com/nklmilojevic/asdf-lazygit.git"

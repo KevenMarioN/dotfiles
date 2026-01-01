@@ -1,0 +1,19 @@
+gui:
+  theme:
+    activeBorderColor:
+      - "#fabd2f" # Gruvbox Yellow (Foco principal)
+      - bold
+    inactiveBorderColor:
+      - "#504945" # Gruvbox Gray (Borda inativa)
+    optionsTextColor:
+      - "#83a598" # Gruvbox Blue (Atalhos)
+    selectedLineBgColor:
+      - "#3c3836" # Fundo da seleção (Igual ao LazyGit)
+    selectedRangeBgColor:
+      - "#3c3836"
+    cherryPickedCommitBgColor:
+      - "#b8bb26" # Gruvbox Green
+    cherryPickedCommitFgColor:
+      - "#282828" # Contraste escuro
+    uncommitedChangesColor:
+      - "#fe8019" # Gruvbox Orange (Destaque para status/logs)
