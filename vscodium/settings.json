@@ -1,0 +1,174 @@
+{
+  // Keven Mário
+  "workbench.colorTheme": "Gruvbox Dark Medium",
+  "workbench.iconTheme": "symbols",
+  "symbols.hidesExplorerArrows": false,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.6,
+  "editor.rulers": [
+    80,
+    120
+  ],
+  "workbench.startupEditor": "newUntitledFile",
+  "editor.renderLineHighlight": "gutter",
+  "workbench.editor.labelFormat": "short",
+  "explorer.compactFolders": false,
+  "editor.semanticHighlighting.enabled": false, // args whites
+  "breadcrumbs.enabled": false,
+  "editor.minimap.enabled": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.statusBar.visible": true,
+  "editor.bracketPairColorization.enabled": true,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "window.commandCenter": false,
+  "workbench.layoutControl.enabled": false,
+  "chat.commandCenter.enabled": false,
+  "files.autoSave": "afterDelay",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock"
+  },
+  "workbench.tips.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.tree.indent": 12,
+  "explorer.decorations.badges": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "workbench.activityBar.location": "hidden",
+  // Custom UI
+  "custom-ui-style.electron": {
+    "titleBarStyle": "hiddenInset"
+  },
+  // Terminal
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontLigatures.enabled": true,
+  // Git
+  "git.decorations.enabled": false,
+  "git.openRepositoryInParentFolders": "always",
+  "git.enableCommitSigning": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.suggestSmartCommit": false,
+  "editor.formatOnSave": true,
+  // Golang
+  "go.testExplorer.enable": true,
+  "go.testFlags": [
+    "-v",
+    "-test.count=1",
+    "-gcflags=-l"
+  ],
+  "go.testTimeout": "10m",
+  "go.buildFlags": [
+    "-gcflags=-l"
+  ],
+  "go.testEnvVars": {
+    "IS_TEST": "true"
+  },
+  "go.lintTool": "golangci-lint-v2",
+  "go.lintOnSave": "package",
+  "go.lintFlags": [
+    "--path-mode=abs",
+    "--fast-only"
+  ],
+  "go.formatTool": "custom",
+  "go.alternateTools": {
+    "customFormatter": "golangci-lint-v2"
+  },
+  "go.formatFlags": [
+    "fmt",
+    "--stdin"
+  ],
+  "go.toolsManagement.autoUpdate": true,
+  "gopls": {
+    // "ui.completion.usePlaceholders": true,
+    // "ui.diagnostic.staticcheck": true,
+    // "ui.navigation.importShortcut": "Both",
+    "ui.semanticTokens": true
+    // "formatting.gofumpt": true
+  },
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    },
+    "editor.suggest.snippetsPreventQuickSuggestions": false
+  },
+  "go.inlayHints.parameterNames": true,
+  "go.inlayHints.assignVariableTypes": true,
+  "go.inlayHints.compositeLiteralTypes": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "files.associations": {
+    "*.gohtml": "go-template"
+  },
+  // Svelte
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  // Typescript
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll.eslint": "explicit"
+    }
+  },
+  // Javascript
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  // Json
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "todo-tree.general.tags": [
+    "BUG",
+    "HACK",
+    "FIXME",
+    "TODO",
+    "XXX",
+    "[ ]",
+    "[x]",
+    "WARN"
+  ],
+  "chat.mcp.gallery.enabled": true,
+  "git-graph.graph.style": "angular",
+  "git-graph.repository.commits.showSignatureStatus": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/usr/bin/zsh"
+    }
+  },
+  // VIM
+  "vim.leader": "<Space>",
+  "vim.useSystemClipboard": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.surround": true,
+  // Which
+  "whichkey.showButtons": true,
+  "window.newWindowProfile": "Default"
+}
