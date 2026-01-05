@@ -57,7 +57,7 @@
   {
     "key": "space w",
     "command": "workbench.action.files.save",
-    "when": "vim.mode=='Normal'"
+    "when": "vim.mode == 'Normal' && (editorTextFocus || !inputFocus)"
   },
   //Action
   {
@@ -349,4 +349,3 @@
     "when": "editorTextFocus && vim.active && vim.use<C-n> && !inDebugRepl || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-n> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
   }
 ]
-

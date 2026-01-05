@@ -170,5 +170,6 @@
   "vim.surround": true,
   // Which
   "whichkey.showButtons": true,
-  "window.newWindowProfile": "Default"
+  "window.newWindowProfile": "Default",
+  "redhat.telemetry.enabled": true
 }
