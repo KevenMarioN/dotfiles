@@ -26,9 +26,9 @@ end
 
 # SSH Agent setup
 if test -z "$SSH_AGENT_PID"
-    if test -f "$HOME/.ssh/personal_github"
+    if test -f "$HOME/.ssh/personal"
         eval (ssh-agent -c)
-        ssh-add ~/.ssh/personal_github
+        ssh-add ~/.ssh/personal
     end
 end
 
