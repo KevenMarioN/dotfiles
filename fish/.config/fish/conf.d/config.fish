@@ -24,15 +24,21 @@ if test -d "$ASDF_DIR"
     end
 end
 
-# SSH Agent setup - Usa socket do systemd user service
-set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
+# SSH Agent setup - Socket persistente para reutilização entre sessões
+set -gx SSH_AGENT_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-# Adiciona a chave pessoal se existir e agente estiver rodando
-if test -S "$SSH_AUTH_SOCK"
-    if test -f "$HOME/.ssh/personal"
-        # Só adiciona se não estiver já no agente
-        ssh-add -l 2>/dev/null | grep -q "personal" || ssh-add "$HOME/.ssh/personal" 2>/dev/null &
-    end
+# Verifica se já existe um agente rodando com o socket
+if not test -S "$SSH_AGENT_SOCK"
+    # Inicia novo agente com socket fixo
+    ssh-agent -a "$SSH_AGENT_SOCK" >/dev/null 2>&1
+end
+
+set -gx SSH_AUTH_SOCK "$SSH_AGENT_SOCK"
+
+# Adiciona a chave apenas se o agente não tem identidades (apenas sessão interativa)
+if status is-interactive; and test -f "$HOME/.ssh/personal"
+    # Só adiciona se o agente estiver vazio (sem identidades)
+    ssh-add -l >/dev/null 2>&1; or ssh-add "$HOME/.ssh/personal"
 end
 
 # GPG (for signed commits)
