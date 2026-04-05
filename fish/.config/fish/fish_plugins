@@ -1,0 +1,24 @@
+# Fisher plugin file - Plugins to install with Fisher
+# Run: curl -sL https://git.io/fisher | source && fisher update
+
+# FZF integration for Fish
+jethrokuan/fzf
+
+# Zoxide integration (better cd)
+jethrokuan/z
+
+# ASDF version manager integration
+rstacruz/fish-asdf
+
+# Git abbreviations
+jhillyerd/plugin-git
+
+# Docker completions
+docker-cli/docker/contrib/completion/fish
+
+# Tmux integration
+jethrokuan/tmux
+
+jorgebucaran/fisher
+
+jomik/fish-gruvbox

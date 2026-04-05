@@ -24,5 +24,3 @@ if command -v eza >/dev/null 2>&1; then
   alias la='eza -la --icons --git --group-directories-first'
   alias tree='eza --tree --icons'
 fi
-
-alias vscodium='/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=com.vscodium.codium --file-forwarding com.vscodium.codium'
