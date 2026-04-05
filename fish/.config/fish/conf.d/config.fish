@@ -24,11 +24,14 @@ if test -d "$ASDF_DIR"
     end
 end
 
-# SSH Agent setup
-if test -z "$SSH_AGENT_PID"
+# SSH Agent setup - Usa socket do systemd user service
+set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Adiciona a chave pessoal se existir e agente estiver rodando
+if test -S "$SSH_AUTH_SOCK"
     if test -f "$HOME/.ssh/personal"
-        eval (ssh-agent -c)
-        ssh-add ~/.ssh/personal
+        # Só adiciona se não estiver já no agente
+        ssh-add -l 2>/dev/null | grep -q "personal" || ssh-add "$HOME/.ssh/personal" 2>/dev/null &
     end
 end
 
