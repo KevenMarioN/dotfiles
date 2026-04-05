@@ -11,9 +11,9 @@ if type -q zoxide
 end
 
 # Starship prompt
-if type -q starship
-    starship init fish | source
-end
+#if type -q starship
+#    starship init fish | source
+#end
 
 # Bat as cat replacement
 if type -q bat
