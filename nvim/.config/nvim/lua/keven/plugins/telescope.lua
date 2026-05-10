@@ -24,9 +24,6 @@ return {
 
     telescope.setup({
       defaults = {
-        preview = {
-          treesitter = false,
-        },
         path_display = { "smart" },
         mappings = {
           i = {
