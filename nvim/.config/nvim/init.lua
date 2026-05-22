@@ -1,3 +1,13 @@
-require("keven.core")
-require("keven.lazy")
-require("keven.lsp")
+require("vim._core.ui2").enable({})
+
+require("options")
+require("keymaps")
+require("commands")
+require("pack")
+require("treesitter")
+require("lsp")
+
+require("gruvbox").setup()
+
+vim.o.background = "dark"
+vim.cmd.colorscheme("gruvbox")
