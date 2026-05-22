@@ -76,13 +76,14 @@ vim.keymap.set("n", "<leader>ps", function() MiniPick.builtin.grep({ pattern = v
 vim.keymap.set("n", "<leader>vh", function() MiniPick.builtin.help() end, { desc = "Mini Help" })
 
 vim.keymap.set("n", "<leader>xx", function() MiniExtra.pickers.diagnostic() end, { desc = "Mini Picker Diagnostics" })
+vim.keymap.set("n", "<leader>xh", function() MiniExtra.pickers.hipatterns() end, { desc = "Mini Picker Hipatterns" })
 vim.keymap.set("n", "<leader>pk", function() MiniExtra.pickers.keymaps() end, { desc = 'Search keymaps' })
 
 --- mini completions --- 
 require("mini.completion").setup({
     lsp_completion = {
         auto_setup = true,
-    }
+    },
 })
 
 --- mini snippets ---
@@ -102,3 +103,31 @@ MiniDiff.setup({
 
 vim.keymap.set("n", "<leader>gg", "<cmd>tabnew | Git | only<cr>", { desc = "Fugitive Full Page New Tab" })
 vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit<CR>", { desc = "Git diff split", })
+
+-- mini highlight
+require('mini.hipatterns').setup({
+  highlighters = {
+    fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+    hack  = { pattern = 'HACK',  group = 'MiniHipatternsHack'  },
+    todo  = { pattern = 'TODO',  group = 'MiniHipatternsTodo'  },
+    note  = { pattern = 'NOTE',  group = 'MiniHipatternsNote'  },
+  }
+})
+
+-- mini statusline
+require('mini.statusline').setup()
+
+-- mini comment
+require('mini.comment').setup()
+
+-- mini animate
+require('mini.animate').setup()
+
+-- mini starter
+require('mini.starter').setup()
+
+-- mini pairs
+require('mini.pairs').setup()
+
+-- mini indentscope
+require('mini.indentscope').setup()
