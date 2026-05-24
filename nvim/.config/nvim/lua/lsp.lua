@@ -12,16 +12,16 @@ capabilities = vim.tbl_deep_extend("force", capabilities, require("mini.completi
 vim.lsp.config("*", { capabilities = capabilities })
 
 vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            diagnostics = { globals = { "vim" } },
-        },
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "vim" } },
     },
+  },
 })
 
 vim.lsp.enable({
-    "lua_ls",
-    "marksman",
-    "gopls",
-    "rust_analyzer",
+  "lua_ls",
+  "marksman",
+  "gopls",
+  "rust_analyzer",
 })
