@@ -40,9 +40,21 @@ require("mini.surround").setup()
 -- | `sn` | Update n_lines |
 -- | `l` / `n` | as suffix for prev/next |
 
---- mini cmdline completion ---
-require("mini.cmdline").setup({
-  autocorrect = { enable = false }
+-- --- mini cmdline completion ---
+require('mini.cmdline').setup({
+  -- Mapeamentos essenciais para garantir que apagar funcione
+  mappings = {
+    complete_next = '<C-k>',
+    complete_prev = '<C-j>',
+    exec = '<CR>',
+    cancel = '<Esc>', -- Às vezes o Esc estava bloqueando o Backspace
+  },
+  -- autocorrect = { enable = false },
+  -- Certifique-se de que o foco está sendo liberado corretamente
+  window = {
+    position = 'bottom',
+    zindex = 1000,
+  },
 })
 
 
@@ -122,7 +134,7 @@ statusline.setup({
       -- 2. Combina os grupos em uma estrutura linear
       return statusline.combine_groups({
         { hl = mode_hl,                 strings = { mode } },
-        { hl = mode_hl .. '1' ,                 strings = {'|>' } },
+        { hl = mode_hl .. '1',          strings = { '|>' } },
         { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
         '%<', -- Marca o ponto onde o statusline começa a ser truncado se a janela for pequena
         { hl = 'MiniStatuslineFilename', strings = { filename } },

@@ -83,17 +83,18 @@ vim.opt.encoding = "UTF-8"              -- Use UTF-8 encoding
 vim.opt.wildmenu = true                 -- Enable command-line completion menu
 vim.opt.wildmode = "longest:full,full"  -- Completion mode for command-line
 vim.opt.wildignorecase = true           -- Case-insensitive tab completion in commands
-vim.opt.completeopt = "menuone,noselect,fuzzy,nosort"
+vim.opt.completeopt = "menu,menuone,noselect,fuzzy,nosort,popup"
+vim.o.autocomplete = true               -- Enables the overall completion feature.
 vim.opt.shortmess:append("c")
 
 -- Cursor Settings
 vim.opt.guicursor = {
-  "n-v-c:block",                                         -- Normal, Visual, Command-line
-  "i-ci-ve:block",                                       -- Insert, Command-line Insert, Visual-exclusive
-  "r-cr:hor20",                                          -- Replace, Command-line Replace
-  "o:hor50",                                             -- Operator-pending
+  "n-v-c:block",                                          -- Normal, Visual, Command-line
+  "i-ci-ve:block",                                        -- Insert, Command-line Insert, Visual-exclusive
+  "r-cr:hor20",                                           -- Replace, Command-line Replace
+  "o:hor50",                                              -- Operator-pending
   "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor", -- All modes: blinking & highlight groups
-  "sm:block-blinkwait175-blinkoff150-blinkon175",        -- Showmatch mode
+  "sm:block-blinkwait175-blinkoff150-blinkon175",         -- Showmatch mode
 }
 
 -- Folding Settings
