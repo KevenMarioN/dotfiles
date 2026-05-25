@@ -1,23 +1,3 @@
--- local MiniFiles = require("mini.files")
--- MiniFiles.setup({
---     mappings = {
---         go_in = "<CR>",
---         go_in_plus = "L",
---         go_out = "_",
---         go_out_plus = "H",
---     },
--- })
---
--- vim.keymap.set("n", "-", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" })
--- vim.keymap.set("n", "<leader>-", function()
---     local buf_name = vim.api.nvim_buf_get_name(0)
---     -- Verifica se o buffer tem um nome e é um arquivo real
---     local path = (buf_name ~= "" and vim.fn.filereadable(buf_name) == 1) and buf_name or nil
---     MiniFiles.open(path)
---     -- Se você quiser focar no arquivo atual, use:
---     if path then MiniFiles.reveal_cwd() end
--- end, { desc = "Toggle into currently opened file" })
-
 ---- mini notify ----
 require("mini.notify").setup({
   -- only show messages
@@ -59,27 +39,13 @@ require('mini.cmdline').setup({
 
 
 --- mini picker ---
-local MiniPick = require("mini.pick")
 local MiniExtra = require("mini.extra")
-MiniPick.setup({
-  mappings = {
-    move_down  = '<C-j>',
-    move_start = '<C-h>',
-    move_up    = '<C-k>'
-  },
-})
-
 MiniExtra.setup()
-
 -- keymaps
-vim.keymap.set("n", "<leader>pf", function() MiniPick.builtin.files() end, { desc = "Mini File Picker" })
-vim.keymap.set("n", "<leader>ps", function() MiniPick.builtin.grep({ pattern = vim.fn.expand("<cword>") }) end,
-  { desc = "Grep word/Search word" })
-vim.keymap.set("n", "<leader>vh", function() MiniPick.builtin.help() end, { desc = "Mini Help" })
-
 vim.keymap.set("n", "<leader>xx", function() MiniExtra.pickers.diagnostic() end, { desc = "Mini Picker Diagnostics" })
 vim.keymap.set("n", "<leader>xh", function() MiniExtra.pickers.hipatterns() end, { desc = "Mini Picker Hipatterns" })
 vim.keymap.set("n", "<leader>pk", function() MiniExtra.pickers.keymaps() end, { desc = 'Search keymaps' })
+
 
 --- mini completions ---
 require("mini.completion").setup({

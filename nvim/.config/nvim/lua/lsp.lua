@@ -6,12 +6,15 @@ vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Se
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
 vim.keymap.set("n", "df", vim.diagnostic.open_float, { desc = "Show line diagnostics" })
-vim.keymap.set("n", "[d", function()
-vim.diagnostic.jump({ count = -1, float = true })
+vim.keymap.set("n", "<leader>D", function() vim.diagnostic.open_float({ Float = true }) end,
+  { desc = "Show diagnostics in line" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show cursor diagnostics" }) -- Cursor diagnostics
+vim.keymap.set("n", "pd", function()
+  vim.diagnostic.jump({ count = -1, float = true })
 end, { desc = "Go to previous diagnostic" })
-vim.keymap.set("n", "]d", function()
+vim.keymap.set("n", "nd", function()
   vim.diagnostic.jump({ count = 1, float = true })
-end, { desc = "Go to next diagnostic" })                                                             -- jump to next diagnostic in buffer
+end, { desc = "Go to next diagnostic" })                                                              -- jump to next diagnostic in buffer
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under cursor" }) -- show documentation for what is under cursor
 
 local severity = vim.diagnostic.severity
