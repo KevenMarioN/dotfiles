@@ -116,7 +116,7 @@ require('mini.hipatterns').setup({
   }
 })
 
-statusline = require("mini.statusline")
+local statusline = require("mini.statusline")
 statusline.setup({
   content = {
     active = function()
