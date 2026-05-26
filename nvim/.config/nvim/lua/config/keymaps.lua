@@ -88,24 +88,3 @@ vim.keymap.set("n", "<leader>u", function()
   vim.cmd.packadd("nvim.undotree")
   require("undotree").open()
 end, { desc = "Toggle Builtin Undotree" })
-
--- fzf lua
---
--- Garante que o fzf-lua esteja disponível antes de mapear
-local ok, fzf = pcall(require, "fzf-lua")
-
-if ok then
-  fzf.setup({})
-
-  -- Mapeamentos
-  vim.keymap.set('n', '<leader>ff', fzf.files, { desc = "FZF Files" })
-  vim.keymap.set('n', '<leader>fg', fzf.live_grep, { desc = "FZF Live Grep" })
-  vim.keymap.set('n', '<leader>fb', fzf.buffers, { desc = "FZF Buffers" })
-  vim.keymap.set('n', '<leader>fh', fzf.help_tags, { desc = "FZF Help Tags" })
-  vim.keymap.set('n', '<leader>fx', fzf.diagnostics_document, { desc = "FZF Diagnostics Document" })
-  vim.keymap.set('n', '<leader>fX', fzf.diagnostics_workspace, { desc = "FZF Diagnostics Workspace" })
-  vim.keymap.set('n', '<leader>fs', fzf.lsp_document_symbols, { desc = "FZF Document Symbols" })
-  vim.keymap.set('n', '<leader>fS', fzf.lsp_workspace_symbols, { desc = "FZF Workspace Symbols" })
-else
-  vim.notify("fzf-lua não encontrado. Verifique a instalação no seu pack.", vim.log.levels.WARN)
-end

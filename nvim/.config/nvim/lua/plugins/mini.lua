@@ -35,6 +35,7 @@ require('mini.cmdline').setup({
     position = 'bottom',
     zindex = 1000,
   },
+ autocomplete = { enable = true, delay = 350 },
 })
 
 
@@ -100,7 +101,6 @@ statusline.setup({
       -- 2. Combina os grupos em uma estrutura linear
       return statusline.combine_groups({
         { hl = mode_hl,                 strings = { mode } },
-        { hl = mode_hl .. '1',          strings = { '|>' } },
         { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
         '%<', -- Marca o ponto onde o statusline começa a ser truncado se a janela for pequena
         { hl = 'MiniStatuslineFilename', strings = { filename } },

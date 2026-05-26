@@ -1,7 +1,6 @@
 require("mason").setup()
 
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "Show LSP definition" })
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "Go to declaration" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.definition, { desc = "Show LSP definition" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "See available code actions" })
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename" })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format Local buffer" })
@@ -16,6 +15,7 @@ vim.keymap.set("n", "nd", function()
   vim.diagnostic.jump({ count = 1, float = true })
 end, { desc = "Go to next diagnostic" })                                                              -- jump to next diagnostic in buffer
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show documentation for what is under cursor" }) -- show documentation for what is under cursor
+
 
 local severity = vim.diagnostic.severity
 vim.diagnostic.config({
