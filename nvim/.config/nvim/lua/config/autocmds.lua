@@ -90,11 +90,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   group = lsp_fmt_group,
   callback = function()
     require("mini.trailspace").trim()
-    local efm = vim.lsp.get_clients({ name = "efm" })
-    if vim.tbl_isempty(efm) then
-      return
-    end
-    vim.lsp.buf.format({ name = "efm", async = true })
+    vim.lsp.buf.format({ async = true })
   end,
 })
 
@@ -114,5 +110,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
         -- You can also set { autotrigger = false } and trigger manually with <C-x><C-o>
       })
     end
+  end,
+})
+
+-- organize imports
+vim.api.nvim_create_autocmd("BufWritePre", {
+  callback = function()
+    if next(vim.lsp.get_clients({ bufnr = 0 })) == nil then
+      return
+    end
+
+    local diagnostics = vim.diagnostic.get(0)
+
+    vim.lsp.buf.code_action({
+      context = {
+        only = { "source.organizeImports" },
+        diagnostics = diagnostics,
+      },
+      apply = true,
+    })
+
+    vim.lsp.buf.format({ async = false })
   end,
 })

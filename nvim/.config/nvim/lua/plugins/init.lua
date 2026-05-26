@@ -10,6 +10,7 @@ vim.pack.add({
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-tree/nvim-tree.lua",
   { src = "https://github.com/ibhagwan/fzf-lua",                branch = "main" },
+  "https://github.com/lewis6991/gitsigns.nvim"
 })
 
 
@@ -18,3 +19,4 @@ require("plugins/mini")
 require("plugins/treesitter")
 require("plugins/nvim-tree")
 require("plugins/fzf")
+require("plugins/gitsigns")
