@@ -5,7 +5,8 @@ require("config.globals")
 require("config.autocmds")
 require("config.keymaps")
 require("plugins.init")
-require("lsp")
+require("config.lsp")
+require("config.debugger")
 
 require("gruvbox").setup()
 

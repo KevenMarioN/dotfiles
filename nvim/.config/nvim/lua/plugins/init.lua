@@ -1,18 +1,25 @@
 vim.pack.add({
-  "https://github.com/nvim-mini/mini.nvim",
-  "https://github.com/rafamadriz/friendly-snippets",
-  { src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main" },
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/mason-org/mason.nvim",
-  "https://github.com/tpope/vim-fugitive",
-  "https://github.com/christoomey/vim-tmux-navigator",
-  "https://github.com/ellisonleao/gruvbox.nvim",
-  "https://github.com/nvim-tree/nvim-web-devicons",
-  "https://github.com/nvim-tree/nvim-tree.lua",
-  { src = "https://github.com/ibhagwan/fzf-lua",                branch = "main" },
-  "https://github.com/lewis6991/gitsigns.nvim"
+	"https://github.com/nvim-mini/mini.nvim",
+	"https://github.com/rafamadriz/friendly-snippets",
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", branch = "main" },
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/mason-org/mason.nvim",
+	"https://github.com/mason-org/mason-lspconfig.nvim",
+	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+	"https://github.com/tpope/vim-fugitive",
+	"https://github.com/christoomey/vim-tmux-navigator",
+	"https://github.com/ellisonleao/gruvbox.nvim",
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/nvim-tree/nvim-tree.lua",
+	{ src = "https://github.com/ibhagwan/fzf-lua", branch = "main" },
+	"https://github.com/lewis6991/gitsigns.nvim",
+	-- DAP
+	"https://github.com/mfussenegger/nvim-dap",
+	"https://github.com/nvim-neotest/nvim-nio",
+	"https://github.com/rcarriga/nvim-dap-ui",
+	"https://github.com/leoluz/nvim-dap-go",
+	"https://github.com/jay-babu/mason-nvim-dap.nvim",
 })
-
 
 require("nvim-web-devicons").setup()
 require("plugins/mini")
@@ -20,3 +27,4 @@ require("plugins/treesitter")
 require("plugins/nvim-tree")
 require("plugins/fzf")
 require("plugins/gitsigns")
+require("plugins/dap")
