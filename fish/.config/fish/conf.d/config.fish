@@ -17,7 +17,7 @@ set -gx ASDF_DIR "$HOME/.asdf"
 if test -d "$ASDF_DIR"
     set -gx PATH "$ASDF_DIR/bin" $PATH
     set -gx PATH "$ASDF_DATA_DIR:$HOME/.asdf/shims" $PATH
-    
+
     # Source ASDF completions for Fish
     if test -f "$ASDF_DIR/completions/asdf.fish"
         source "$ASDF_DIR/completions/asdf.fish"

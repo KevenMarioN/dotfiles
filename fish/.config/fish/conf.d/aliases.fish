@@ -2,7 +2,7 @@
 
 # Basic aliases
 alias zs='source ~/.config/fish/config.fish'
-alias nvim='nvim'
+alias vim='nvim'
 alias c='clear'
 
 # Zoxide initialization (Fish native)
