@@ -1,0 +1,36 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 12";
+    show-icons: true;
+}
+
+* {
+    border-colour:               #12A1F2;
+    background-colour:           #000000;
+    foreground-colour:           #12A1F2;
+    alternate-background:        #000000;
+    normal-background:           #000000;
+    normal-foreground:           #12A1F2;
+    active-background:           #12A1F2;
+    active-foreground:           #12A1F2;
+    selected-normal-background:  #12A1F2;
+    selected-normal-foreground:  #000000;
+    selected-urgent-background:  #12A1F2;
+    selected-urgent-foreground:  #12A1F2;
+    selected-active-background:  #12A1F2;
+    selected-active-foreground:  #12A1F2;
+    alternate-normal-background: #000000;
+    alternate-normal-foreground: #12A1F2;
+    alternate-urgent-background: #000000;
+    alternate-urgent-foreground: #12A1F2;
+    alternate-active-background: #000000;
+    alternate-active-foreground: #12A1F2;
+}
+
+window {
+    padding: 10px;
+    border:  0px;
+    border-radius: 0px;
+    border-color: #12A1F2;
+    background-color: #000000;
+    spacing: 0;
+}

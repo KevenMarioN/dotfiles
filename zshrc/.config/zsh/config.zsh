@@ -38,16 +38,15 @@ setopt GLOB_DOTS                 # Include dotfiles when globbing.
 
 export ASDF_DIR="$HOME/.asdf"
 if [ -d "$ASDF_DIR" ]; then
-  export PATH="$ASDF_DIR/bin:$PATH"
   export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
   fpath=("$ASDF_DIR/completions" $fpath)
   autoload -Uz compinit && compinit
 fi
 
 if [ -z "$SSH_AGENT_PID" ]; then
-  if [ -f "$HOME/.ssh/personal_github" ]; then
+  if [ -f "$HOME/.ssh/personal" ]; then
     eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/personal_github # Opcional: Adiciona sua chave principal automaticamente
+    ssh-add ~/.ssh/personal# Opcional: Adiciona sua chave principal automaticamente
   fi
 fi
 # GPG (para commits assinados)
