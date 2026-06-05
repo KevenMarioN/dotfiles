@@ -43,12 +43,15 @@ if [ -d "$ASDF_DIR" ]; then
   autoload -Uz compinit && compinit
 fi
 
-if [ -z "$SSH_AGENT_PID" ]; then
-  if [ -f "$HOME/.ssh/personal" ]; then
-    eval "$(ssh-agent -s)"
+if  command -v keychain >/dev/null 2>&1; then
+  eval $(keychain --eval --quiet personal)
+else
+  if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -s) > /dev/null
     ssh-add ~/.ssh/personal# Opcional: Adiciona sua chave principal automaticamente
   fi
 fi
+
 # GPG (para commits assinados)
 export GPG_TTY=$(tty)
 

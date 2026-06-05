@@ -153,8 +153,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -226,6 +224,7 @@ bindsym $mod+shift+s exec systemctl suspend
 bindsym $mod+t exec kitty
 bindsym Print exec flameshot gui
 bindsym $mod+b exec google-chrome-stable
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/powermenu.sh
 
 #Tap click enable(1)/disable(0)
 # exec xinput set-prop "YOUR TOUCHPAD NAME" "libinput Tapping Enabled" 1
@@ -238,11 +237,14 @@ bindsym $mod+b exec google-chrome-stable
 
 
 exec_always --no-startup-id ~/.screenlayout/monitor_setup.sh
+exec_always feh --bg-fill ~/Pictures/Wall/space.png
+
 exec --no-startup-id xset s off
 exec --no-startup-id xset s noblank
 exec --no-startup-id xset -dpms
 
-exec --no-startup-id ~/back.sh
+exec --no-startup-id sh -c 'echo 4880 > /sys/class/backlight/intel_backlight/brightness'
 exec --no-startup-id /usr/bin/pipewire
 exec --no-startup-id /usr/bin/pipewire-pulse
 exec --no-startup-id /usr/bin/wireplumber
+
