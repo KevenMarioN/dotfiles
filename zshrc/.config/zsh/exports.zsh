@@ -8,6 +8,7 @@ export TABSIZE=2
 export SSH_TERM="xterm-256color"
 export BAT_THEME="gruvbox-dark"
 
+(( $+ZSH_HIGHLIGHT_STYLES )) || typeset -gA ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[comment]='fg=240'
 ZSH_HIGHLIGHT_STYLES[default]='fg=251'
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'

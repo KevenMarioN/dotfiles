@@ -129,6 +129,7 @@ install_via_brew "fzf" "fzf"
 install_via_brew "zoxide" "zoxide"
 install_via_brew "fastfetch" "fastfetch"
 install_via_brew "tree" "tree"
+install_via_brew "rtk" ""
 
 # --- Database Tools ---
 loginfo "Installing database tools..."

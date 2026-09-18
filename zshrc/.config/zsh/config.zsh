@@ -38,17 +38,28 @@ setopt GLOB_DOTS                 # Include dotfiles when globbing.
 
 export ASDF_DIR="$HOME/.asdf"
 if [ -d "$ASDF_DIR" ]; then
-  export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+  export ASDF_DATA_DIR="${ASDF_DATA_DIR:-$HOME/.asdf}"
+  export PATH="${ASDF_DATA_DIR}/bin:${ASDF_DATA_DIR}/shims:$PATH"
   fpath=("$ASDF_DIR/completions" $fpath)
   autoload -Uz compinit && compinit
 fi
 
-if  command -v keychain >/dev/null 2>&1; then
-  eval $(keychain --eval --quiet personal)
+if command -v keychain >/dev/null 2>&1; then
+  # Prefer the desktop agent (gcr/kde); fall back to a keychain-managed agent.
+  KEYCHAIN_SOCK="/run/user/$(id -u)/gcr/ssh"
+  if [ -z "$SSH_AUTH_SOCK" ] && [ -S "$KEYCHAIN_SOCK" ]; then
+    export SSH_AUTH_SOCK="$KEYCHAIN_SOCK"
+  fi
+  if [ -n "$SSH_AUTH_SOCK" ] && ssh-add -l &>/dev/null; then
+    : # agent do ambiente já tem as chaves carregadas
+  else
+    eval "$(keychain --eval --quiet --inherit any --timeout 7200 personal 2>/dev/null)" || true
+    ssh-add -l &>/dev/null || ssh-add ~/.ssh/personal 2>/dev/null
+  fi
 else
   if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s) > /dev/null
-    ssh-add ~/.ssh/personal# Opcional: Adiciona sua chave principal automaticamente
+    ssh-add ~/.ssh/personal # Opcional: Adiciona sua chave principal automaticamente
   fi
 fi
 
