@@ -141,7 +141,11 @@ fi
 if ! command -v zsh &>/dev/null; then
   loginfo "Installing ZSH..."
   sudo apt install zsh -y
-  chsh -s $(which zsh)
+fi
+
+if [ "$(getent passwd "$USER" | cut -d: -f7)" != "/usr/bin/zsh" ]; then
+  loginfo "Setting ZSH as default shell..."
+  chsh -s /usr/bin/zsh
 else
   loginfo "ZSH has install..."
 fi
@@ -301,8 +305,8 @@ if command -v asdf &>/dev/null || [ -x "$HOME/.asdf/bin/asdf" ]; then
   install_tool "python" "" # Scripting
 
   loginfo "\n🐳 Instalando Ferramentas DevOps..."
-  install_tool "lazygit" "https://github.com/nklmilojevic/asdf-lazygit.git"
-  install_tool "lazydocker" "https://github.com/comdotlinux/asdf-lazydocker.git"
+  #install_tool "lazygit" "https://github.com/nklmilojevic/asdf-lazygit.git"
+  #install_tool "lazydocker" "https://github.com/comdotlinux/asdf-lazydocker.git"
   # install_tool "dive" "https://github.com/looztra/asdf-dive.git"
 
   "$ASDF_EXEC" reshim
